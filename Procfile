@@ -1,1 +1,1 @@
-web: java -jar build/libs/stock-management-0.0.1.jar --server.port=$PORT
+web: java -jar -Dspring.profiles.active=prd build/libs/stock-management-0.0.1.jar --server.port=$PORT
