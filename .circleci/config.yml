@@ -19,6 +19,11 @@ jobs:
   test:
     docker:
       - image: circleci/openjdk:11-jdk
+      - image: postgres:12
+        environment:
+          POSTGRES_USER: projectormato
+          POSTGRES_DB: projectormato
+          POSTGRES_PASSWORD: password
 
     working_directory: ~/repo
     environment:
@@ -27,13 +32,24 @@ jobs:
 
     steps:
       - checkout
+      - setup_remote_docker
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "build.gradle" }}
+            - v1-dependencies-{{ checksum "build.gradle.kts" }}
             - v1-dependencies-
       - run: gradle dependencies
       - save_cache:
           paths:
             - ~/.gradle
-          key: v1-dependencies-{{ checksum "build.gradle" }}
+          key: v1-dependencies-{{ checksum "build.gradle.kts" }}
+      - run:
+          name: Waiting for Postgres to be ready
+          command: |
+            for i in `seq 1 20`;
+            do
+              nc -z localhost 5432 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for Postgress && exit 1
       - run: ./gradlew test

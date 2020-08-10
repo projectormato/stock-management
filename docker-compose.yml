@@ -2,12 +2,12 @@ version: "3.7"
 services:
   db:
     image: postgres:12
-    container_name: ttdd-db
+    container_name: stock-db
     environment:
-      - POSTGRES_USER=ttdd
+      - POSTGRES_USER=projectormato
       - POSTGRES_PASSWORD=password
       - PGPASSWORD=password
-      - POSTGRES_DB=ttdd
+      - POSTGRES_DB=projectormato
       - DATABASE_HOST=localhost
     ports:
       - "5432:5432"
