@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/ttdd
+    username: ttdd
+    password: password
+    initialization-mode: always
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database: POSTGRESQL
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
