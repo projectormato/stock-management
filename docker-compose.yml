@@ -7,7 +7,9 @@ services:
       - POSTGRES_USER=projectormato
       - POSTGRES_PASSWORD=password
       - PGPASSWORD=password
-      - POSTGRES_DB=projectormato
+      - POSTGRES_DB=stock_db
       - DATABASE_HOST=localhost
+    volumes:
+      - ./mysql/sqls:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
