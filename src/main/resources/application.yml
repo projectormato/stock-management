@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/projectormato
+    url: jdbc:postgresql://localhost:5432/stock_db
     username: projectormato
     password: password
     initialization-mode: always
